@@ -7,11 +7,11 @@ import api from "@/lib/api";
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default function ProjectsPage() {
-  const [projects, setProjects] = useState([]);
-  const [form, setForm] = useState({ name: "", description: "" });
-  const [editing, setEditing] = useState(null);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState("");
+    const [projects, setProjects] = useState([]);
+    const [form, setForm] = useState({ name: "", description: "" });
+    const [editing, setEditing] = useState(null);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState("");
 
   const fetchProjects = (message = "") => {
     return api
@@ -33,43 +33,43 @@ export default function ProjectsPage() {
     fetchProjects("Projects loaded successfully.");
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const method = editing ? api.put : api.post;
-    const actionLabel = editing ? "updated" : "created";
-    const url = editing ? `/projects/${editing}` : "/projects";
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formMethod = editing ? api.put : api.post;
+        const actionLabel = editing ? "updated" : "created";
+        const url = editing ? `/projects/${editing}` : "/projects";
 
-    method(url, form)
-      .then(() => {
-        return fetchProjects(`Project ${actionLabel} successfully.`);
-      })
-      .then(() => {
-        setForm({ name: "", description: "" });
-        setEditing(null);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setSuccess("");
-      });
-  };
+        formMethod(url, form)
+            .then(() => {
+                return fetchProjects(`Project ${actionLabel} successfully.`);
+            })
+            .then(() => {
+                setForm({ name: "", description: "" });
+                setEditing(null);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setSuccess("");
+            });
+    };
 
-  const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this project?")) return;
-    try {
-      await api.delete(`/projects/${id}`);
-      setProjects((prev) => prev.filter((project) => project.id !== id));
-      await fetchProjects("Project deleted successfully.");
-      await wait(200);
-    } catch (err) {
-      setError(err.message);
-      setSuccess("");
-    }
-  };
+    const handleDelete = async (id) => {
+        if (!confirm("Are you sure you want to delete this project?")) return;
+        try {
+            await api.delete(`/projects/${id}`);
+            setProjects((prev) => prev.filter((project) => project.id !== id));
+            await fetchProjects("Project deleted successfully.");
+            await wait(200);
+        } catch (err) {
+            setError(err.message);
+            setSuccess("");
+        }
+    };
 
-  const startEdit = (project) => {
-    setForm({ name: project.name, description: project.description });
-    setEditing(project.id);
-  };
+    const handleEdit = (project) => {
+        setForm({ name: project.name, description: project.description });
+        setEditing(project.id);
+    };
 
   return (
     <div className="p-6">
@@ -138,38 +138,38 @@ export default function ProjectsPage() {
         </div>
       </form>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className="border p-4 rounded shadow hover:shadow-md transition"
-          >
-            <Link
-              href={`/projects/${project.id}`}
-              className="font-semibold text-lg text-blue-600 hover:underline"
-            >
-              {project.name}
-            </Link>
-            <p className="text-sm text-gray-600 mb-2">
-              {project.description || "No description"}
-            </p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => startEdit(project)}
-                className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(project.id)}
-                className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-              >
-                Delete
-              </button>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {projects.map((project) => (
+                    <div
+                        key={project.id}
+                        className="border p-4 rounded shadow hover:shadow-md transition"
+                    >
+                        <Link
+                            href={`/projects/${project.id}`}
+                            className="font-semibold text-lg text-blue-600 hover:underline"
+                        >
+                            {project.name}
+                        </Link>
+                        <p className="text-sm text-gray-600 mb-2">
+                            {project.description || "No description"}
+                        </p>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => handleEdit(project)}
+                                className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                onClick={() => handleDelete(project.id)}
+                                className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+    );
 }

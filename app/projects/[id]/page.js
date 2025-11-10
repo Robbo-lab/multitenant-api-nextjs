@@ -14,10 +14,10 @@ async function getProject(id) {
   }
 }
 
-export default async function ProjectDetailPage({ params }) {
-  const { id } = await params;
-  const project = await getProject(id);
-  const createdAt = project.created?.human || project.created_at;
+export default async function ProjectDetail({ params }) {
+    const { id } = await params;
+    const project = await getProject(id);
+    const createdAt = project.created?.human || project.created_at;
 
   return (
     <div className="space-y-6 p-6">
