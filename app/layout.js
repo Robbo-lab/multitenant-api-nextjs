@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
 
         <footer className="border-t bg-white">
           <div className="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-gray-600">
-            © 2025 <strong>AT3 Next.js App</strong>. Built with Next.js &
+            © 2026 <strong>AT3 Next.js App</strong>. Built with Next.js &
             Tailwind
           </div>
         </footer>
