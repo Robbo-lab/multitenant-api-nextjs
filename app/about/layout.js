@@ -1,11 +1,7 @@
 export default function Layout({ children }) {
   return (
-    <div>
-      <section className="section">
-        <div className="container">
-          <main>{children}</main>
-        </div>
-      </section>
-    </div>
+    <section className="py-6 md:py-10">
+      <main>{children}</main>
+    </section>
   );
 }

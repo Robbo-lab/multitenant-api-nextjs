@@ -37,29 +37,41 @@ export default function NasaApi() {
   };
 
   return (
-    <div className="space-y-6 py-6">
-      <div className="space-y-2">
-        <p className="text-sm uppercase tracking-wide text-blue-600">
-          NASA APIs
-        </p>
-        <h1 className="text-3xl font-bold text-slate-900">
+    <section className="section-stack py-6">
+      <div className="space-y-3">
+        <p className="eyebrow">NASA API</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl">
           Astronomy Picture of the Day
         </h1>
-        <p className="text-sm text-slate-600">
-          Search photos and videos from NASA&apos;s APOD feed by date range or
-          count. Toggle thumbnails to include previews for video entries.
+        <p className="max-w-2xl text-sm leading-7 text-slate-600">
+          Search APOD entries by date, date range, or count. Results can open
+          in a separate detail view.
         </p>
       </div>
 
-      <ApodForm fetchApodData={fetchApodData} isLoading={isLoading} />
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <div className="space-y-4">
+          <div className="rounded-lg border border-slate-200 bg-white/90 p-4 shadow-sm">
+            <p className="text-sm font-semibold text-slate-950">Filters</p>
+            <p className="mt-1 text-sm leading-6 text-slate-600">
+              Use a single date for one result, or use a range or count to load
+              multiple items.
+            </p>
+          </div>
 
-      {error && (
-        <p className="rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          {error}
-        </p>
-      )}
+          <ApodForm fetchApodData={fetchApodData} isLoading={isLoading} />
+        </div>
 
-      <ApodContent apodData={apodData} isLoading={isLoading} />
-    </div>
+        <div className="space-y-4">
+          {error && (
+            <div className="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">
+              {error}
+            </div>
+          )}
+
+          <ApodContent apodData={apodData} isLoading={isLoading} />
+        </div>
+      </div>
+    </section>
   );
 }

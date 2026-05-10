@@ -23,7 +23,7 @@ const ApodForm = ({ fetchApodData, isLoading }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+      className="surface-card space-y-4 rounded-[1rem] p-6"
     >
       <div className="grid gap-4 md:grid-cols-2">
         <div className="flex flex-col gap-1">
@@ -31,7 +31,7 @@ const ApodForm = ({ fetchApodData, isLoading }) => {
             Date (YYYY-MM-DD)
           </label>
           <input
-            className="rounded border border-slate-300 p-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg border border-slate-300 bg-white p-2.5 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
@@ -40,12 +40,11 @@ const ApodForm = ({ fetchApodData, isLoading }) => {
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-slate-700">Count</label>
           <input
-            className="rounded border border-slate-300 p-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg border border-slate-300 bg-white p-2.5 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             type="number"
             min="1"
             value={count}
             onChange={(e) => setCount(e.target.value)}
-            placeholder="1"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -53,7 +52,7 @@ const ApodForm = ({ fetchApodData, isLoading }) => {
             Start Date (YYYY-MM-DD)
           </label>
           <input
-            className="rounded border border-slate-300 p-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg border border-slate-300 bg-white p-2.5 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
@@ -64,7 +63,7 @@ const ApodForm = ({ fetchApodData, isLoading }) => {
             End Date (YYYY-MM-DD)
           </label>
           <input
-            className="rounded border border-slate-300 p-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg border border-slate-300 bg-white p-2.5 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
@@ -84,7 +83,7 @@ const ApodForm = ({ fetchApodData, isLoading }) => {
 
       <div className="flex justify-end">
         <button
-          className="inline-flex items-center rounded bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+          className="button-primary hover:button-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
           type="submit"
           disabled={isLoading}
         >

@@ -40,131 +40,155 @@ export default function UsersPage() {
 
   const getInitial = (name) => (name ? name.charAt(0).toUpperCase() : "?");
 
-  if (loading) return <p className="p-6 text-gray-600">Loading users...</p>;
+  if (loading) {
+    return (
+      <div className="surface-card flex min-h-[18rem] items-center justify-center rounded-[1rem] px-6 py-10">
+        <div className="text-center">
+          <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-teal-600" />
+          <p className="mt-4 text-sm font-medium text-slate-700">
+            Loading users…
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Users</h1>
+    <section className="section-stack py-6">
+      <div className="space-y-3">
+        <p className="eyebrow">Users</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl">
+          User directory
+        </h1>
+        <p className="max-w-2xl text-sm leading-7 text-slate-600">
+          Review user records, email details, and created dates.
+        </p>
+      </div>
+
       {error && (
-        <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          <p className="font-semibold">Unable to load users</p>
+        <div className="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">
+          <p className="font-semibold">This data could not be loaded.</p>
           <p>{error}</p>
         </div>
       )}
+
       {!error && success && (
-        <div className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">
-          <p className="font-semibold">Success</p>
+        <div className="rounded-lg border border-teal-200 bg-teal-50 px-4 py-3 text-sm text-teal-900">
+          <p className="font-semibold">Status</p>
           <p>{success}</p>
         </div>
       )}
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-gray-200 bg-white p-4 text-sm shadow-sm">
-        <div>
-          <p className="text-xs uppercase tracking-wide text-gray-500">
-            Total users
-          </p>
-          <p className="text-xl font-semibold text-gray-900">{users.length}</p>
-        </div>
-        <div className="flex gap-2">
-          <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-            {PAGE_SIZE} per page
-          </span>
-          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">
-            Page {currentPage}
-          </span>
-        </div>
-      </div>
 
-      <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-sm">
-        <table className="min-w-full border-collapse text-sm">
-          <thead className="bg-slate-50 text-left font-semibold text-slate-600">
-            <tr>
-              <th className="p-3">User</th>
-              <th className="p-3">Email</th>
-              <th className="p-3">Created</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedUsers.map((user, index) => {
-              const emailValue =
-                typeof user.email === "string"
-                  ? user.email
-                  : user.email?.address;
-              const verified =
-                typeof user.email === "object"
-                  ? user.email?.verified
-                  : undefined;
-              const createdValue =
-                user.created?.human || user.created?.string || "—";
+      <div className="surface-card rounded-[1rem] p-4 md:p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
+          <div>
+            <p className="text-xs uppercase tracking-wide text-slate-500">
+              Total users
+            </p>
+            <p className="text-xl font-semibold text-slate-950">{users.length}</p>
+          </div>
+          <div className="flex gap-2">
+            <span className="rounded-lg bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+              {PAGE_SIZE} per page
+            </span>
+            <span className="rounded-lg bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+              Page {currentPage}
+            </span>
+          </div>
+        </div>
 
-              return (
-                <tr
-                  key={user.id}
-                  className={`${
-                    index % 2 === 0 ? "bg-white" : "bg-slate-50/40"
-                  } transition hover:bg-blue-50`}
-                >
-                  <td className="p-3">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-semibold text-blue-700">
-                        {getInitial(user.name)}
+        <div className="mt-4 overflow-hidden rounded-lg border border-slate-200 bg-white/95 shadow-sm">
+          <table className="min-w-full border-collapse text-sm">
+            <thead className="bg-slate-50 text-left font-semibold text-slate-600">
+              <tr>
+                <th className="p-3">User</th>
+                <th className="p-3">Email</th>
+                <th className="p-3">Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paginatedUsers.map((user, index) => {
+                const emailValue =
+                  typeof user.email === "string"
+                    ? user.email
+                    : user.email?.address;
+                const verified =
+                  typeof user.email === "object"
+                    ? user.email?.verified
+                    : undefined;
+                const createdValue =
+                  user.created?.human || user.created?.string || "—";
+
+                return (
+                  <tr
+                    key={user.id}
+                    className={`${
+                      index % 2 === 0 ? "bg-white" : "bg-slate-50/40"
+                    } transition hover:bg-slate-50`}
+                  >
+                    <td className="p-3">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-50 font-semibold text-teal-700">
+                          {getInitial(user.name)}
+                        </div>
+                        <div>
+                          <p className="font-medium text-slate-900">
+                            {user.name}
+                          </p>
+                          <p className="text-xs text-slate-500">ID: {user.id}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-medium text-slate-900">
-                          {user.name}
-                        </p>
-                        <p className="text-xs text-slate-500">ID: {user.id}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="p-3">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="break-all text-sm text-slate-800">
-                        {emailValue || "N/A"}
-                      </span>
-                      {verified !== undefined && (
-                        <span
-                          className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-                            verified
-                              ? "bg-green-100 text-green-700"
-                              : "bg-yellow-100 text-yellow-700"
-                          }`}
-                        >
-                          {verified ? "Verified" : "Unverified"}
+                    </td>
+                    <td className="p-3">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="break-all text-sm text-slate-800">
+                          {emailValue || "N/A"}
                         </span>
-                      )}
-                    </div>
-                  </td>
-                  <td className="p-3">
-                    <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">
-                      {createdValue}
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+                        {verified !== undefined && (
+                          <span
+                            className={`rounded-lg px-2 py-0.5 text-xs font-semibold ${
+                              verified
+                                ? "bg-teal-100 text-teal-800"
+                                : "bg-amber-100 text-amber-800"
+                            }`}
+                          >
+                            {verified ? "Verified" : "Unverified"}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="p-3">
+                      <span className="rounded-lg bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">
+                        {createdValue}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
 
-      <div className="mt-4 flex items-center justify-between text-sm">
-        <button
-          className="rounded border border-gray-300 px-3 py-1 font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <p className="text-gray-600">
-          Page {currentPage} of {totalPages}
-        </p>
-        <button
-          className="rounded border border-gray-300 px-3 py-1 font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-          onClick={() => goToPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
+        <div className="mt-4 flex items-center justify-between text-sm">
+          <button
+            className="button-secondary px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <p className="text-slate-600">
+            Page {currentPage} of {totalPages}
+          </p>
+          <button
+            className="button-secondary px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

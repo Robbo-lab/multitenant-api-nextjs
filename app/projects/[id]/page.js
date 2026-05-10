@@ -15,43 +15,62 @@ async function getProject(id) {
 }
 
 export default async function ProjectDetail({ params }) {
-    const { id } = await params;
-    const project = await getProject(id);
-    const createdAt = project.created?.human || project.created_at;
+  const { id } = await params;
+  const project = await getProject(id);
+  const createdAt = project.created?.human || project.created_at;
 
   return (
-    <div className="space-y-6 p-6">
-      <Link href="/projects" className="text-sm text-blue-600 hover:underline">
-        ← Back to projects
-      </Link>
+    <section className="section-stack py-6">
+      <div className="space-y-3">
+        <p className="eyebrow">Projects</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl">
+          Project details
+        </h1>
+        <p className="max-w-2xl text-sm leading-7 text-slate-600">
+          Review the selected project record.
+        </p>
+      </div>
 
-      <div className="rounded-lg border bg-white p-6 shadow-sm">
-        <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
-        {project.description && (
-          <p className="mt-2 text-gray-600">{project.description}</p>
-        )}
+      <div>
+        <Link
+          href="/projects"
+          className="button-secondary hover:border-slate-400 hover:bg-white"
+        >
+          &larr; Back to projects
+        </Link>
+      </div>
 
-        <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-          <div className="rounded border p-4">
-            <dt className="text-sm uppercase tracking-wide text-gray-500">
+      <article className="surface-card rounded-[1rem] p-6 md:p-8">
+        <div className="space-y-3">
+          <h2 className="text-3xl font-semibold tracking-tight text-slate-950">
+            {project.name}
+          </h2>
+          <p className="text-sm leading-7 text-slate-600">
+            {project.description || "No description"}
+          </p>
+        </div>
+
+        <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-lg border border-slate-200 bg-white/85 p-4 shadow-sm">
+            <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
               Project ID
             </dt>
-            <dd className="mt-1 font-mono text-sm text-gray-900">
+            <dd className="mt-2 font-mono text-sm text-slate-950">
               {project.id}
             </dd>
           </div>
 
           {createdAt && (
-            <div className="rounded border p-4">
-              <dt className="text-sm uppercase tracking-wide text-gray-500">
+            <div className="rounded-lg border border-slate-200 bg-white/85 p-4 shadow-sm">
+              <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                 Created
               </dt>
-              <dd className="mt-1 text-gray-900">{createdAt}</dd>
+              <dd className="mt-2 text-sm text-slate-950">{createdAt}</dd>
             </div>
           )}
         </dl>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 

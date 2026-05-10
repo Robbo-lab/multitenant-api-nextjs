@@ -15,10 +15,10 @@ export const metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
   ),
   title: "AT3 Next.js App",
-  description: "A modern application built with Next.js and Bulma",
+  description: "A Next.js frontend for users, projects, and NASA API pages.",
   openGraph: {
     title: "My Next.js App",
-    description: "A modern web application built with Next.js",
+    description: "A Next.js frontend for users, projects, and NASA API pages.",
     images: [
       {
         url: "/logo.png",
@@ -34,22 +34,32 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-slate-50">
-        <header className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-lg">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 md:flex-nowrap md:gap-8">
-            <Link href="/" className="text-2xl font-semibold">
-              AT3 Next.js App
+      <body className="min-h-screen text-slate-950 antialiased">
+        <header className="sticky top-0 z-20 border-b border-white/50 bg-white/70 backdrop-blur-xl">
+          <div className="page-shell flex flex-wrap items-center justify-between gap-4 py-4 md:flex-nowrap md:gap-8">
+            <Link href="/" className="flex items-center gap-3">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-teal-600 text-sm font-bold text-white shadow-lg shadow-teal-950/15">
+                AT3
+              </span>
+              <span>
+                <span className="block text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">
+                  NMTAFE Project
+                </span>
+                <span className="block text-lg font-semibold text-slate-950">
+                  Next.js Frontend
+                </span>
+              </span>
             </Link>
             <nav
-              className="flex flex-1 flex-wrap items-center justify-end gap-2 md:justify-between"
+              className="flex flex-1 flex-wrap items-center justify-end gap-2"
               aria-label="Primary"
             >
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap items-center gap-1 border-l border-slate-200 pl-4 md:gap-2 md:pl-6">
                 {navigation_links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="rounded-full px-4 py-2 text-sm font-semibold text-white/90 transition hover:bg-white/15 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/70"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950"
                   >
                     {link.label}
                   </Link>
@@ -59,12 +69,11 @@ export default function RootLayout({ children }) {
           </div>
         </header>
 
-        <main className="mx-auto max-w-6xl px-4 py-8">{children}</main>
+        <main className="page-shell py-10 md:py-14">{children}</main>
 
-        <footer className="border-t bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-6 text-center text-sm text-gray-600">
-            © 2026 <strong>AT3 Next.js App</strong>. Built with Next.js &
-            Tailwind
+        <footer className="border-t border-slate-200/70 bg-white/60 backdrop-blur-xl">
+          <div className="page-shell py-6 text-center text-sm text-slate-500">
+            © 2026 <strong className="text-slate-700">AT3 Next.js App</strong>.
           </div>
         </footer>
       </body>
