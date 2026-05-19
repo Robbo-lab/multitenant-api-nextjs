@@ -1,6 +1,15 @@
 import { notFound } from "next/navigation";
 
-export const runtime = "edge";
+
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  return [
+    { id: "2024-01-01" },
+    { id: "2024-01-02" },
+    { id: "2024-01-03" },
+  ];
+}
 
 export default async function ApodDetail({ params }) {
   const apiKey = process.env.NEXT_PUBLIC_NASA_API_KEY || "";
@@ -8,7 +17,11 @@ export default async function ApodDetail({ params }) {
   const { id } = params;
 
   const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${id}`;
-  const res = await fetch(apiUrl);
+
+  const res = await fetch(apiUrl, {
+    cache: "force-cache",
+  });
+
 
   if (!res.ok) {
     notFound();
