@@ -14,10 +14,10 @@ export const metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
   ),
-  title: "AT3 Next.js App",
+  title: "API Integrated Next.js App",
   description: "A Next.js frontend for users, projects, and NASA API pages.",
   openGraph: {
-    title: "My Next.js App",
+    title: "MyJamJar NextJS Projects App",
     description: "A Next.js frontend for users, projects, and NASA API pages.",
     images: [
       {
@@ -27,7 +27,7 @@ export const metadata = {
         alt: "App Logo",
       },
     ],
-    siteName: "My Next.js App",
+    siteName: "MyJamJar Next.js App",
   },
 };
 
