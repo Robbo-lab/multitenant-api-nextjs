@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-// export const runtime = "edge";
+export const runtime = "edge";
 
 export default async function ApodDetail({ params }) {
   const apiKey = process.env.NEXT_PUBLIC_NASA_API_KEY || "";
