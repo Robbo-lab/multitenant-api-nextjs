@@ -10,6 +10,7 @@
     NEXT_PUBLIC_API_TOKEN=<your_bearer_token_here>
     NEXT_PUBLIC_WORKSPACE_ID=tenant-pm-001
     NEXT_PUBLIC_INTEGRATION_NAME=NextJS-Client
+    NEXT_PUBLIC_NASA_API_KEY=
     ```
 4. Run the app:
     ```bash
